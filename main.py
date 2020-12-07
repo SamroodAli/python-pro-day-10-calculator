@@ -28,49 +28,49 @@ operations = {
     "/":divide,
 }
 
-result = 0
-first_time_operation = True
-continuing_operations = True
 
-while continuing_operations:
-
-    if first_time_operation:
-        clear()
-        first_time_operation=False
-        num1 = float(input("Enter the first number\n"))
+def calculator():
+    """ a calculator function"""
+    clear()
+    result = float(input("Enter the first number\n"))
         # removing trailing single 0 if any
-        if (num1*10) % 10==0:
-            num1 = int(num1)
-    else:
-        num1 = result
-
-    print("Enter the operator or c to clear and start again\ntype anything else to exit:\n")
-    for key in operations:
-        print(key,end=' ')
-    operator = input('\n')
-
-    if operator=='c':
-        clear()
-        result=0
-        first_time_operation=True
-        continue
-    elif operator in operations:
-        operation = operations[operator]
-    else:
-        clear()
-        print("Thank you for using my calculator.")
-        result = 0
-        continuing_operations=False
-        break
-
-    num2 = float(input("Enter the next number\n"))
-    # removing trailing single 0 if any
-    if (num2*10) % 10==0:
-        num2 = int(num2)
-
-    result = operation(num1,num2)
-    # removing trailing zero if results in a single zero decimal
     if (result*10) % 10==0:
         result = int(result)
+    
+    while True:
+        print("\nEnter the operator")
+        for key in operations:
+            print(key,end=' ')
+        print("\nc = clear and start again \ntyping anything else will exit")
+        operator = input('\n')
 
-    print(f"\n{num1} {operator} {num2} = {result}\n")
+        if operator =='c':
+            calculator()
+        elif operator in operations:
+            operation = operations[operator]
+        else:
+            clear()
+            return
+
+        num2 = input("\nEnter the next number or x to exit\n")
+        if num2 =="x":
+            clear()
+            print("Thank you for using my calculator")
+            return
+        else:
+            num2=float(num2)
+        
+        # removing trailing single 0 if any
+        if (num2*10) % 10==0:
+            num2 = int(num2)
+
+        num1 = result
+        result = operation(result,num2)
+        # removing trailing zero if results in a single zero decimal
+        if (result*10) % 10==0:
+            result = int(result)
+
+        print(f"""\n____________________________\n\n{num1} {operator} {num2} = {result}\n____________________________""")
+
+# starting the calculator
+calculator()
