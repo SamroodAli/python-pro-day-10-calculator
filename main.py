@@ -1,4 +1,5 @@
 from replit import clear
+from art import logo
 # Calculator
 # add
 def add(n1,n2):
@@ -30,8 +31,10 @@ operations = {
 
 
 def calculator():
-    """ a calculator function"""
     clear()
+    print(logo)
+    """ a calculator function"""
+  
     result = float(input("Enter the first number\n"))
         # removing trailing single 0 if any
     if (result*10) % 10==0:
