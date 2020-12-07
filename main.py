@@ -45,7 +45,7 @@ def calculator():
         operator = input('\n')
 
         if operator =='c':
-            calculator()
+            return calculator()
         elif operator in operations:
             operation = operations[operator]
         else:
