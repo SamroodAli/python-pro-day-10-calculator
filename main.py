@@ -35,37 +35,38 @@ def num_check(num):
     try:
         num = float(num)
     except:
-        new_num= input('not a valid number, please enter number again\nc=exit\n')
-        num=num_check(new_num)
+        new_num= input('not a valid number, please enter the number again\nc=exit\n')
+        return num_check(new_num)
 
     if (num*10) % 10==0:
         num = int(num)
     return num
 
+def operator_check():
+    print('\nEnter an operator :')
+    for key in operations:
+        print(key,end=' ')
+    operator=input("\n")
+    if operator=='c':
+        return calculator()
+    if operator in operations:
+        return operator
+    else:
+        print('Not a valid operator')
+        return operator_check()
+
 def calculator():
     """ a calculator function"""
     clear()
     print(logo)
-    print('type c anytime to clear')
+    print('type c anytime to clear\n')
     
     result = input("Enter the first number\n")
     result = num_check(result)
     
     while True:
-        valid_operator=False
-        while not valid_operator:
-            print("\nEnter the operator")
-            for key in operations:
-                print(key,end=' ')
-            operator = input('\n')
-            if operator =='c':
-                return calculator()
-            elif operator in operations:
-                valid_operator=True
-                operation = operations[operator]
-            else:
-                print('\nNot a valid operator.',end=' ')
-
+        operator = operator_check()
+        operation = operations[operator]
         num2 = input("\nEnter the next number\n")
         num2 = num_check(num2)
 
